@@ -12,6 +12,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import com.aweirdtrashcan.wai.databinding.ActivityMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -86,7 +88,20 @@ class MainActivity : AppCompatActivity() {
                 println(
                     "***LOCATION***\nLatitude: ${it.result.latitude}\nLongitude: ${it.result.longitude}"
                 )
+//                supportFragmentManager.fragmentFactory = FragmentFactory(it.result.latitude, it.result.longitude)
+//                mapsFragment()
             }
+        }
+    }
+
+    /*
+    Not working because google won't allow me use Maps without adding a credit
+    card to their console
+     */
+    private fun mapsFragment() {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add<MapsFragment>(R.id.flMain)
         }
     }
 
